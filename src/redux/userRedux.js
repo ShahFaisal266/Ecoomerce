@@ -19,10 +19,22 @@ reducers:{
         state.isFetching=false;
         state.error=true
     },
+    registerStart:(state)=>{
+        state.isFetching=true;
+    },
+    registerSuccess:(state,action)=>{
+        state.isFetching=false;
+        state.currentUser=action.payload;
+
+    },
+    registerFailure:(state)=>{
+        state.isFetching=false;
+        state.error=true
+    },
 
 },
 
 });
 
-export const {loginFailure,loginStart,loginSuccess}=userSlice.actions;
+export const {loginFailure,registerFailure,registerSuccess,registerStart,loginStart,loginSuccess}=userSlice.actions;
 export default userSlice.reducer;

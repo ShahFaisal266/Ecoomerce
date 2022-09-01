@@ -47,8 +47,8 @@ const App = () => {
 
     
 
-    <Route path="/register/">
-    {user ? <Redirect to ="/"/> : <Register/>}
+    <Route path="/register">
+    {user ? <Redirect to ="/home"/> : <Register/>}
     </Route>
     
     </Switch>

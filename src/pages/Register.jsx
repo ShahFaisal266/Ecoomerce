@@ -1,6 +1,9 @@
 import styled from "styled-components";
+import { register } from "../redux/apiCalls";
 import { mobile } from "../responsive";
-
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch,useSelector } from "react-redux";
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -8,7 +11,7 @@ const Container = styled.div`
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
-    url("https://images.pexels.com/photos/6984661/pexels-photo-6984661.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+    url("https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000"),
       center;
   background-size: cover;
   display: flex;
@@ -52,25 +55,63 @@ const Button = styled.button`
   background-color: teal;
   color: white;
   cursor: pointer;
+  margin-left:15px;
+  
 `;
 
 const Register = () => {
+const [username, setUSername] = useState("");
+//const [errors,isFectching ] = useState("");
+const [password,setPassword ] = useState("");
+const [confPassword,setConfPassword ] = useState("");
+const history=useHistory();
+const [email,setEmail ] = useState("");
+const handleClickeee=(e)=>{
+  e.preventDefault()
+  history.push('/')
+}
+const handleClickee=(e)=>
+{
+  e.preventDefault()
+  if(username===""||password===""||email===""||confPassword==="")
+  {
+     alert("Please fill all the fields");
+  }
+    if(username!==""&&password!==""&&
+    confPassword!==""&&email!==""&&password===confPassword)
+    {
+       register(dispatch,{username,email,password});
+    }
+    if(password!==confPassword)
+    {
+       alert("Passwords are not Matching");
+       
+    }
+
+}
+//const history=useHistory();
+//const {isFectching,error }= useSelector((state) => state.user);
+const dispatch = useDispatch();
+
+console.log(confPassword);
+console.log(email);
+
   return (
     <Container>
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
         <Form>
-          <Input placeholder="name" />
-          <Input placeholder="last name" />
-          <Input placeholder="username" />
-          <Input placeholder="email" />
-          <Input placeholder="password" />
-          <Input placeholder="confirm password" />
+          <Input placeholder="usernamename" onChange={(e)=>setUSername(e.target.value)}/>
+          
+          <Input placeholder="email" onChange={(e)=>setEmail(e.target.value)}/>
+          <Input placeholder="password" onChange={(e)=>setPassword(e.target.value)}/>
+          <Input placeholder="confirm password" onChange={(e)=>[handleClickee,setConfPassword(e.target.value)]}/>
           <Agreement>
             By creating an account, I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button>CREATE</Button>
+          <Button onClick={handleClickee}>CREATE</Button>
+          <Button onClick={handleClickeee}> Back</Button>
         </Form>
       </Wrapper>
     </Container>

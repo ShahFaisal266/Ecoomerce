@@ -174,29 +174,11 @@ const Cart = () => {
 }
 const publishableKey="pk_test_51LaGRVCsHnAScmAL7b9cKtBlV7KAYzOrz3P1ucnAUnWzPznyq7bqp4pucuHZesVpKO15rRNg6GpdNOuRI1FnO9w500lKImkEKN";
 
-/*
-const payNow = async token=>{
-  try{
-    const response = await axios
-    ({
-      url:"http://localhost:5000/api/checkout/payment", 
-     method:'post',
-            data:{
-              amount:cart.total,
-              token:stripeToken.id,
-            },
-        
-          });
-            console.log('Your payment was scuccessfull');
-            console.log(response.data);
-            history.push("/success",{data:response.data});
-          
-  }
-  catch(error)
-  {
-    console.log(error);
-  }
-}*/
+
+const handleClickeee=(e)=>{
+  e.preventDefault()
+  history.push('/home')
+}
 useEffect(() => {
   const makeRequest= async ()=>{
       try{
@@ -228,7 +210,7 @@ useEffect(() => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
+          <TopButton onClick={handleClickeee}>CONTINUE SHOPPING</TopButton>
           <TopTexts>
             <TopText>Shopping Bag(2)</TopText>
             <TopText>Your Wishlist (0)</TopText>

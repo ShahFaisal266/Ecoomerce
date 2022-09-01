@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {mobile} from "../responsive";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { login } from "../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,7 +12,7 @@ const Container = styled.div`
       rgba(255, 255, 255, 0.5),
       rgba(255, 255, 255, 0.5)
     ),
-    url("https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940")
+    url("https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?w=2000")
       center;
   background-size: cover;
   display: flex;
@@ -70,6 +71,7 @@ const Login = () => {
 const [username, setUSername] = useState("");
 
 const [password,setPassword ] = useState("");
+ const history=useHistory();
 
 const {isFectching,error }= useSelector((state) => state.user);
 
@@ -79,6 +81,10 @@ const handleClick=(e)=>{
   e.preventDefault();
   login(dispatch,{username,password});
 
+}
+const handleChange=(e)=>{
+  e.preventDefault();
+  history.push("/register")
 }
 
   return (
@@ -94,7 +100,7 @@ const handleClick=(e)=>{
           <Button onClick={handleClick} disabled={isFectching}>LOGIN</Button>
           {error &&<Error>Something Went Wrong....</Error>}
           <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
-          <Link >CREATE A NEW ACCOUNT</Link>
+          <Link onClick={handleChange}>CREATE A NEW ACCOUNT</Link>
         </Form>
       </Wrapper>
     </Container>
